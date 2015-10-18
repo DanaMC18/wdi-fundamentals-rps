@@ -1,0 +1,91 @@
+////////////////////////////////////////////////
+/*   Provided Code - Please Don't Edit   */
+////////////////////////////////////////////////
+//'use strict';//
+
+function getInput() {
+    console.log("Please choose either 'rock', 'paper', or 'scissors'.");
+    return prompt();
+}
+function randomPlay() {
+    var randomNumber = Math.random();
+    if (randomNumber < 0.33) {
+        return "rock";
+    } else if (randomNumber < 0.66) {
+        return "paper";
+    } else {
+        return "scissors";
+    }
+}
+////////////////////////////////////////////////
+/*           Write Your Code Below            */
+////////////////////////////////////////////////
+
+var playerMove;
+var computerMove;
+
+function getPlayerMove(playerMove) {
+    return playerMove || getInput();
+}
+
+function getComputerMove(computerMove) {
+    return computerMove || randomPlay();
+}
+
+function getWinner(playerMove,computerMove) {
+    var winner;
+    if ((playerMove === "rock" && computerMove === "scissors") ||
+        (playerMove === "paper" && computerMove === "rock") ||
+        (playerMove === "scissors" && computerMove === "paper")) {
+        return "player";
+    }
+    else if ((playerMove === "rock" && computerMove === "paper") ||
+             (playerMove === "paper" && computerMove === "scissors") ||
+             (playerMove === "scissors" && computerMove === "rock")) {
+       return "computer";
+    }
+    else if (playerMove === computerMove) {
+        return "tie";
+    }
+    return winner;
+}
+
+function playToFive() {
+    console.log("Let's play Rock, Paper, Scissors!");
+    var playerWins = 0;
+    var computerWins = 0;
+    while (playerWins < 5 && computerWins < 5) {
+        var playerMove = getPlayerMove();
+        var computerMove = getComputerMove();
+        var winner = getWinner(playerMove, computerMove);
+        if (winner === "player") {
+            playerWins++;
+            console.log("Player chose:" + " " + playerMove + ".");
+            console.log("Computer chose:" + " " + computerMove + ".");
+            console.log("Player wins this round!");
+            console.log ("The score is currently:" + " " + "Player" + " " + playerWins + "," + " " + "Computer" + " " + computerWins + ".");
+        }      
+        else if (winner === "computer") {
+            computerWins++;
+            console.log("Player chose:" + " " + playerMove + ".");
+            console.log("Computer chose:" + " " + computerMove + ".");
+            console.log("Computer wins this round!");
+            console.log ("The score is currently:" + " " + "Player" + " " + playerWins + "," + " " + "Computer" + " " + computerWins + ".");
+        }
+        else if (winner === "tie") {
+            console.log("Player chose:" + " " + playerMove + ".");
+            console.log("Computer chose:" + " " + computerMove + ".");
+            console.log("This round is a tie!");
+            console.log ("The score is currently:" + " " + "Player" + " " + playerWins + "," + " " + "Computer" + " " + computerWins + ".");
+        }
+    if (playerWins === 5) {
+        console.log("Player wins game!");
+    }
+    else if (computerWins === 5) {
+        console.log("Computer wins game!");
+    }
+    }    
+    return [playerWins, computerWins]; 
+}
+
+playToFive();
